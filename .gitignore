@@ -1,0 +1,45 @@
+# Secrets: the bot auth key never goes into git
+auth_key.txt
+*.key
+.env
+
+# CMake / Visual Studio build output
+build/
+out/
+.vs/
+CMakeUserPresets.json
+CMakeSettings.json
+
+# Stray CMake files from in-source configures
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+Testing/
+
+# Visual Studio user files
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# Build artifacts
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.obj
+*.o
+*.a
+
+# Python (tools/mock_backend.py)
+__pycache__/
+.venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
