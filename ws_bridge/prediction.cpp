@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <iostream>
 
 #include "engine/search.hpp"
 
@@ -14,8 +15,8 @@ engine::TimeLimit timeLimitForMode(std::string_view mode) {
         limit.moveTime = 200ms;
         limit.depth = 2;
     } else if (mode == "deep") {
-        limit.moveTime = 3000ms;
-        limit.depth = 4;
+        limit.moveTime = 900000ms;
+        limit.depth = 6;
     } else {
         limit.moveTime = 1000ms; // unknown mode: sensible default
     }
@@ -56,7 +57,21 @@ std::optional<std::string> answerPrediction(std::string_view fen,
         return std::nullopt;
     }
 
-    const chess::Move best = engine::findBestMove(board, timeLimitForMode(mode));
+    std::vector<engine::MoveEval> debug;
+    const chess::Move best = engine::findBestMove(board, timeLimitForMode(mode), &debug);
+
+    // Only the move actually chosen, plus the line it expects to follow.
+    const auto chosen = std::find_if(debug.begin(), debug.end(),
+        [&](const engine::MoveEval& e) { return e.move == best; });
+    if (chosen != debug.end()) {
+        std::cerr << "  [eval] chosen " << chess::uci::moveToUci(chosen->move)
+                   << " score=" << chosen->score
+                   << " (material=" << chosen->materialScore << " mobility=" << chosen->mobilityScore << ")"
+                   << (chosen->timedOut ? " [TIMED OUT]" : "") << " pv:";
+        for (chess::Move m : chosen->pv) std::cerr << " " << chess::uci::moveToUci(m);
+        std::cerr << "\n";
+    }
+
     if (best == chess::Move::NO_MOVE) {
         error = "no legal move in position (checkmate or stalemate)";
         return std::nullopt;

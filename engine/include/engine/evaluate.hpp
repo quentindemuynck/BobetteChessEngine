@@ -4,10 +4,20 @@
 
 namespace engine {
 
+/// evaluate()'s terms, broken out for debugging. Both are already signed from
+/// the side-to-move's point of view, same as evaluate()'s return value, and
+/// evaluate() == breakdown.material + breakdown.mobility.
+struct EvalBreakdown {
+    int material = 0;
+    int mobility = 0;
+};
+
 /// Static evaluation of a position, in centipawns, from the point of view of
 /// the side to move (positive = good for the side to move).
 ///
-/// TODO: implement evaluation terms (material, piece-square tables, ...).
-int evaluate(const chess::Board& board);
+/// If `breakdown` is non-null, it's filled with this call's terms.
+///
+/// TODO: implement more evaluation terms (piece-square tables, ...).
+int evaluate(const chess::Board& board, EvalBreakdown* breakdown = nullptr);
 
 } // namespace engine

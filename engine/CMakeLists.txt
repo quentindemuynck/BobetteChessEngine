@@ -4,7 +4,8 @@ add_library(engine_core STATIC
     src/evaluate.cpp
     src/time_manager.cpp
     include/scoresystems/piecevalues.hpp
-)
+    include/scoresystems/pst.hpp
+ )
 
 target_include_directories(engine_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include)
