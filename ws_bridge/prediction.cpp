@@ -12,8 +12,10 @@ engine::TimeLimit timeLimitForMode(std::string_view mode) {
     engine::TimeLimit limit;
     if (mode == "fast") {
         limit.moveTime = 200ms;
+        limit.depth = 2;
     } else if (mode == "deep") {
         limit.moveTime = 3000ms;
+        limit.depth = 4;
     } else {
         limit.moveTime = 1000ms; // unknown mode: sensible default
     }

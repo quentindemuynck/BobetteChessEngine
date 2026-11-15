@@ -12,7 +12,12 @@ namespace engine {
 /// Returns chess::Move::NO_MOVE if there are no legal moves (checkmate or
 /// stalemate) — and, for now, always, since the search is not implemented.
 ///
-/// TODO: implement the search (iterative deepening, alpha-beta, ...).
+/// TODO: implement the search (iterative deepening, alpha-beta, ...)
+/// 
+/// 
 chess::Move findBestMove(const chess::Board& board, const TimeLimit& limit);
+
+int negamax(chess::Board& board, int depth,
+    std::chrono::steady_clock::time_point start, std::chrono::milliseconds budget);
 
 } // namespace engine

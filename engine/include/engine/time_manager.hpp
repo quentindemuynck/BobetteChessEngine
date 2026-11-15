@@ -35,10 +35,11 @@ struct TimeLimit {
 };
 
 /// Decides how much wall-clock time the search may spend on the current move,
-/// given the limits and the side to move.
-///
-/// TODO: implement time allocation (e.g. remaining / movesToGo + increment share,
-///       with a safety margin).
+/// given the limits and the side to move. `moveTime` wins outright; otherwise
+/// the remaining clock is split across `movesToGo` (or an assumed 30 if
+/// unset), plus the increment, capped below the actual time left. With no
+/// clock info at all (depth/nodes/infinite only), returns milliseconds::max()
+/// so the clock isn't what stops the search.
 std::chrono::milliseconds allocateTime(const TimeLimit& limit, chess::Color sideToMove);
 
 } // namespace engine
