@@ -126,4 +126,27 @@ namespace engine::pst
         // rank 8 (worst: dead center of the board)
         -30, -40, -40, -50, -50, -40, -40, -30,
     };
+
+    // Endgame shape: the opposite instinct from KingTable. With few pieces
+    // left there's usually no attack to hide from, and the king becomes one
+    // of the strongest pieces on the board — it needs to be centralized to
+    // help push passed pawns and to take part in mating the enemy king.
+    constexpr std::array<int, 64> EndgameKingTable = {
+        // rank 1 (corners are now the worst squares, not the best)
+        -50, -30, -30, -30, -30, -30, -30, -50,
+        // rank 2
+        -30, -30,   0,   0,   0,   0, -30, -30,
+        // rank 3
+        -30, -10,  20,  30,  30,  20, -10, -30,
+        // rank 4 (center: best squares for an endgame king)
+        -30, -10,  30,  40,  40,  30, -10, -30,
+        // rank 5
+        -30, -10,  30,  40,  40,  30, -10, -30,
+        // rank 6
+        -30, -10,  20,  30,  30,  20, -10, -30,
+        // rank 7
+        -30, -20, -10,   0,   0, -10, -20, -30,
+        // rank 8
+        -50, -40, -30, -20, -20, -30, -40, -50,
+    };
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chess.hpp>
+#include "scoresystems/bonuspoints.hpp"
 
 namespace engine {
 
@@ -19,5 +20,6 @@ struct EvalBreakdown {
 ///
 /// TODO: implement more evaluation terms (piece-square tables, ...).
 int evaluate(const chess::Board& board, EvalBreakdown* breakdown = nullptr);
+bool hasCastled(const chess::Board& board, chess::Color color);
 
 } // namespace engine

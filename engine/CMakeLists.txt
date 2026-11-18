@@ -3,8 +3,12 @@ add_library(engine_core STATIC
     src/search.cpp
     src/evaluate.cpp
     src/time_manager.cpp
+    src/openingbook.cpp
+    include/engine/openingbook.hpp
     include/scoresystems/piecevalues.hpp
     include/scoresystems/pst.hpp
+    include/scoresystems/bonuspoints.hpp
+
  )
 
 target_include_directories(engine_core PUBLIC
